@@ -63,11 +63,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
-      body{
+      body {
         margin: 0;
         padding: 0;
         font-family: sans-serif;
-        background: #34495e;
+        background: #4d48fc;
       }
       .box{
         width: 400px;
@@ -78,6 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         transform: translate(-50%,-50%);
         background: #191919;
         text-align: center;
+        border-radius: 10px;
       }
       .box{
         color: white;
