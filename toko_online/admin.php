@@ -2,6 +2,28 @@
 //if(!isset($_GET['page']) || !isset($_GET['subpage'])) {
 //  header("location:admin.php?page=home&&subpage=dashboard");
 //}
+session_start();
+
+function isUserLoggedIn() {
+  return isset($_SESSION['user_id']);
+  print_r($_SESSION);exit;
+}
+
+// Fungsi untuk melakukan logout
+function logout() {
+    unset($_SESSION['user_id']);
+    unset($_SESSION['id_akses']);
+    session_destroy();
+}
+
+// Jika tombol logout ditekan
+if (isset($_GET['logout'])) {
+    logout();
+
+    // Arahkan pengguna ke halaman login
+    header("location:login.php");
+    exit;
+}
 
 
 require_once "controller/base_controller.php";
@@ -9,6 +31,7 @@ $baseController = new BaseController();
 $baseController->callasset();
 define('BASE_URL', 'http://localhost/TK4_DIM');
 ?>
+
 <html>
 
 <head>
@@ -21,7 +44,7 @@ define('BASE_URL', 'http://localhost/TK4_DIM');
 </head>
 
 <body>
-
+<?php if (isUserLoggedIn()): ?>
   <div class="clm-12 np">
     <?php include "view/adder/sidebar-admin.php" ?>
     <div class="clm-10 np">
@@ -44,6 +67,12 @@ define('BASE_URL', 'http://localhost/TK4_DIM');
       </div>
     </div>
   </div>
+<?php else: ?>
+  <?php
+  header("location:login.php");
+  exit;
+  ?>
+  <?php endif; ?>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/js/all.min.js"
   integrity="sha512-rpLlll167T5LJHwp0waJCh3ZRf7pO6IT1+LZOhAyP6phAirwchClbTZV3iqL3BMrVxIYRbzGTpli4rfxsCK6Vw=="
